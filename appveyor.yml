@@ -29,5 +29,3 @@ build_script:
   - npm run build
 
 test: off
-
-publish: always
