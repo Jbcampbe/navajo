@@ -14,7 +14,6 @@ cache:
   - node_modules
   - '%APPDATA%\npm-cache'
   - '%USERPROFILE%\.electron'
-  - '%USERPROFILE%\AppData\Local\Yarn\cache'
 
 init:
   - git config --global core.autocrlf input
@@ -26,7 +25,7 @@ install:
   - node --version
 
 build_script:
-  #- yarn test
-  - yarn build
+  #- npm test
+  - npm run build
 
 test: off
