@@ -3,7 +3,4 @@ const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm
 const alphabetMap = {}
 alphabet.forEach(letter => { alphabetMap[letter] = ' ' })
 
-export default {
-  alphabet,
-  alphabetMap
-}
+export { alphabet, alphabetMap }
