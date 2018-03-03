@@ -1,5 +1,11 @@
 import { alphabet } from './alphabet'
 
+/**
+ * generate all possible simple shift plaintexts
+ *
+ * @param {string} message - encrypted message. should be all lowercase with no spaces
+ * @returns {array} - array of plaintext messages. represents all possible ceaser shifts
+ */
 function runShifts (message) {
   const shifts = []
   let decryptedMessage
@@ -11,6 +17,13 @@ function runShifts (message) {
   return shifts
 }
 
+/**
+ * decrypt simple shift (ceaser) ciphers
+ *
+ * @param {string} message - encrypted message. should be all lowercase with no spaces
+ * @param {number} shiftAmt - how many letters to shift the alphabet by
+ * @returns {string} - plaintext message
+ */
 function decipherCeaser (message, shiftAmt) {
   let decryptedMessage = ''
   let shiftIdx
@@ -26,6 +39,13 @@ function decipherCeaser (message, shiftAmt) {
   return decryptedMessage
 }
 
+/**
+ * decrypt keyword ciphers
+ *
+ * @param {string} message - encrypted message. should be all lowercase with no spaces
+ * @param {object} keyMap - maps ciphertext keys to plaintext values
+ * @returns {string} - plaintext message
+ */
 function decipherKeyword (message, keyMap) {
   let decryptedMessage = ''
   for (let i = 0; i < message.length; i++) {

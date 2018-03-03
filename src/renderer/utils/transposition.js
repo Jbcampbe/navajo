@@ -1,3 +1,10 @@
+/**
+ * decrypts anagram ciphers
+ *
+ * @param  {string} message - encrypted message. should be all lowercase with no spaces
+ * @param  {array} columnShifts - represents how the letters in each block are to be permuted. length of this array determines the block size
+ * @returns {string} - plaintext message
+ */
 function decipherAnagram (message, columnShifts) {
   let blockSize = columnShifts.length
   let newBlock
