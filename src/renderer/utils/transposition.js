@@ -7,7 +7,7 @@ function decipherAnagram (message, columnShifts) {
     newBlock = []
 
     for (let j = 0; j < blockSize; j++) {
-      newBlock[j] = message[i + columnShifts[j]]
+      newBlock[i + columnShifts[j]] = message[i + j]
     }
 
     decryptedMessage = decryptedMessage.concat(newBlock)

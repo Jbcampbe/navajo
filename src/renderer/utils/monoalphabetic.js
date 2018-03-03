@@ -16,7 +16,10 @@ function decipherCeaser (message, shiftAmt) {
   let shiftIdx
 
   for (let i = 0; i < message.length; i++) {
-    shiftIdx = (alphabet.indexOf(message[i]) + shiftAmt) % 26
+    shiftIdx = alphabet.indexOf(message[i]) - shiftAmt
+    if (shiftIdx < 0) {
+      shiftIdx = shiftIdx + 26
+    }
     decryptedMessage = decryptedMessage.concat(alphabet[shiftIdx])
   }
 
