@@ -1,4 +1,4 @@
-import { runShifts, decipherCeaser, decipherKeyword } from '@/utils/monoalphabetic'
+import { runShifts, decipherCeaser, decipherKeyword, addLetterMapping, clearLetterMapping, alphabetMap } from '@/utils/monoalphabetic'
 
 const shiftMessage = 'bpqaqabwmvaczmbpibbpmapqnbqaewzsqvoxzwxmztg'
 const shiftPlaintext = 'thisistoensurethattheshiftisworkingproperly'
@@ -50,5 +50,14 @@ describe('monoalphabetic.js', () => {
   it('should decrypt a keyword cipher', () => {
     let decryptedMessage = decipherKeyword(keywordMessage, letterMap)
     expect(decryptedMessage).to.equal(keywordPlaintext)
+  })
+
+  it('should prevent adding duplicate keyword mappings', () => {
+    // cloning the object to avoid bleeding state
+    let testAlphabetMap = JSON.parse(JSON.stringify(alphabetMap))
+    expect(addLetterMapping(testAlphabetMap, 'c', 'a')).to.equal(true)
+    expect(addLetterMapping(testAlphabetMap, 'd', 'a')).to.equal(false)
+    clearLetterMapping(testAlphabetMap, 'c')
+    expect(addLetterMapping(testAlphabetMap, 'd', 'a')).to.equal(true)
   })
 })

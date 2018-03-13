@@ -2,11 +2,11 @@
  * decrypts anagram ciphers
  *
  * @param  {string} message - encrypted message. should be all lowercase with no spaces
- * @param  {array} columnShifts - represents how the letters in each block are to be permuted. length of this array determines the block size
+ * @param  {array} perms - represents how the letters in each block are to be permuted. length of this array determines the block size
  * @returns {string} - plaintext message
  */
-function decipherAnagram (message, columnShifts) {
-  let blockSize = columnShifts.length
+function decipherAnagram (message, perms) {
+  let blockSize = perms.length
   let newBlock
   let decryptedMessage = []
 
@@ -14,7 +14,7 @@ function decipherAnagram (message, columnShifts) {
     newBlock = []
 
     for (let j = 0; j < blockSize; j++) {
-      newBlock[i + columnShifts[j]] = message[i + j]
+      newBlock[i + perms[j]] = message[i + j]
     }
 
     decryptedMessage = decryptedMessage.concat(newBlock)
@@ -23,4 +23,45 @@ function decipherAnagram (message, columnShifts) {
   return decryptedMessage.join('')
 }
 
-export { decipherAnagram }
+/**
+ * decrypts columnar transposition ciphers
+ *
+ * @param {string} message - encrypted message. should be all lowercase with no spaces
+ * @param {array} perms - represents how the columns in the cipher are to be permuted. the length of the array determines how many columns
+ */
+function decipherColumnarTransposition (message, perms) {
+  let decryptedMessage = ''
+  let numCols = perms.length
+  let numRows = message.length / numCols
+
+  for (let i = 0; i < numRows; i++) {
+    for (let j = i; j < message.length; j += numRows) {
+      decryptedMessage = decryptedMessage.concat(message[j])
+    }
+  }
+
+  if (isPermutedColumns(perms)) {
+    // if the columns were permuted then we need to add the additional
+    // step of shuffling the columns (exactly the same as solving an anagram cipher)
+    decryptedMessage = decipherAnagram(decryptedMessage, perms)
+  }
+
+  return decryptedMessage
+}
+
+/**
+ * checks if the columns in the columnar transposition were permuted
+ *
+ * @param {array} perms - column permutations
+ */
+function isPermutedColumns (perms) {
+  for (let i = 0; i < perms.length; i++) {
+    if (perms[i] !== i) {
+      return false
+    }
+  }
+
+  return true
+}
+
+export { decipherAnagram, decipherColumnarTransposition }

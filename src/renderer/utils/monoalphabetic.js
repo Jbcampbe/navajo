@@ -1,5 +1,8 @@
 import { alphabet } from './alphabet'
 
+const alphabetMap = {}
+alphabet.forEach(letter => { alphabetMap[letter] = ' ' })
+
 /**
  * generate all possible simple shift plaintexts
  *
@@ -55,4 +58,31 @@ function decipherKeyword (message, keyMap) {
   return decryptedMessage
 }
 
-export { runShifts, decipherCeaser, decipherKeyword }
+/**
+ * adds a mapping between a ciphertext letter and its plaintext equivalent. protects
+ * against having two keys map to the same value
+ *
+ * @param {array} alphabetMap - the alphabet map object you wish to modify
+ * @param {string} ciphertextLetter - the key in the alphabet map
+ * @param {string} plaintextLetter - the new value to add to the alphabet map
+ */
+function addLetterMapping (alphabetMap, ciphertextLetter, plaintextLetter) {
+  if (Object.values(alphabetMap).includes(plaintextLetter)) {
+    return false
+  }
+
+  alphabetMap[ciphertextLetter] = plaintextLetter
+  return true
+}
+
+/**
+ *
+ * @param {array} alphabetMap - the alphabet map object you wish to modify
+ * @param {letter} ciphertextLetter - the key in the alphabet map you wish to clear
+ */
+function clearLetterMapping (alphabetMap, ciphertextLetter) {
+  alphabetMap[ciphertextLetter] = ' '
+  return true
+}
+
+export { runShifts, decipherCeaser, decipherKeyword, addLetterMapping, clearLetterMapping, alphabetMap }
