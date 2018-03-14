@@ -1,5 +1,5 @@
 <template>
-  <div>Substitution</div>
+
 </template>
 
 <script>

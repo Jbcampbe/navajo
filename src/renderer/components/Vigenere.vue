@@ -1,5 +1,5 @@
 <template>
-  <div>Vigenere</div>
+
 </template>
 
 <script>

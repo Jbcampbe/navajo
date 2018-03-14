@@ -1,5 +1,5 @@
 <template>
-  <div>Columnar</div>
+
 </template>
 
 <script>
