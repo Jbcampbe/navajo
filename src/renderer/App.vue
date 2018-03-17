@@ -10,4 +10,7 @@
   }
 </script>
 
-<style></style>
+<style>
+  @import "vodal/common.css";
+  @import "vodal/rotate.css";
+</style>
