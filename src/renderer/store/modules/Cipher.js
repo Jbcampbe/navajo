@@ -4,7 +4,13 @@ const state = {
 }
 
 const mutations = {
+  updatePlaintext (state, newPlaintext) {
+    state.plaintext = newPlaintext
+  },
 
+  updateCiphertext (state, newCiphertext) {
+    state.ciphertext = newCiphertext
+  }
 }
 
 const actions = {

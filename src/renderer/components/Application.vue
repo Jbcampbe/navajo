@@ -50,6 +50,10 @@
     margin: 0;
   }
 
+  * {
+    outline: none;
+  }
+
   a {
     text-decoration: none;
     color: white;
@@ -61,12 +65,12 @@
   .application-root {
     background-color: #081830;
     height: 100vh;
+    min-width: 650px;
   }
 
   .main-content {
     display: flex;
     height: calc(100vh - 100px);
-    justify-content: center;
   }
 
   .navigation-bar {

@@ -17,6 +17,10 @@ export default new Router({
       component: Application,
       children: [
         {
+          path: '',
+          redirect: 'shift'
+        },
+        {
           path: 'shift',
           component: Shift
         },
