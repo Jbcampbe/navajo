@@ -50,6 +50,10 @@
     margin: 0;
   }
 
+  * {
+    outline: none;
+  }
+
   a {
     text-decoration: none;
     color: white;
