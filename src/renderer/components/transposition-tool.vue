@@ -113,6 +113,7 @@
   .block-header {
     display: flex;
     align-items: center;
+    padding: 1px;
   }
 
   .text-header {
@@ -122,9 +123,11 @@
   .change-block-size-arrow {
     height: 10px;
     width: 20px;
-    font-size: 15px;
+    font-size: 20px;
     padding: 0;
     background: transparent;
     border: none;
+    color: white;
+    line-height: 10px;
   }
 </style>
