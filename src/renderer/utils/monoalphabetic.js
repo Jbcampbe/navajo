@@ -1,7 +1,6 @@
-import { alphabet } from './alphabet'
+import { alphabet, buildAlphabetMap } from './alphabet'
 
-const alphabetMap = {}
-alphabet.forEach(letter => { alphabetMap[letter] = ' ' })
+const alphabetMap = buildAlphabetMap(' ')
 
 /**
  * generate all possible simple shift plaintexts
