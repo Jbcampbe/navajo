@@ -38,7 +38,7 @@
       },
 
       incrementBlockSize () {
-        if (this.blockSize < 7) {
+        if (this.blockSize < 18) {
           this.blockSize++
           this.blocks = this.createBlocks(this.blockSize)
           let decryptedMessage = this.decryptionMethod(this.$store.state.Cipher.ciphertext, this.blocks)
@@ -75,7 +75,7 @@
   .transposition-tool {
     width: 100%;
     max-width: 250px;
-    height: 100px;
+    min-height: 100px;
     background-color: #E3341B;
     color: white;
     border: none;
@@ -89,6 +89,7 @@
   .block-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
   }
 
   .block {
