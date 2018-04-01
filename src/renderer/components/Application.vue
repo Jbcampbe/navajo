@@ -28,7 +28,13 @@
         </router-link>
       </div>
     </nav>
-    <div class="frequency-menu-container">
+    <div class="frequency-chart-container" :class="{ 'drawer-closed': drawerClosed, 'drawer-open': !drawerClosed }">
+        <button class="drawer-handle" @click="toggleDrawer">
+            <span>FREQUENCY</span>
+        </button>
+        <div class="drawer">
+            <span>Drawer</span>
+        </div>
     </div>
   </div>
 </template>
@@ -40,6 +46,18 @@
     name: 'application',
     components: {
       CipherInputs
+    },
+
+    data () {
+      return {
+        drawerClosed: true
+      }
+    },
+
+    methods: {
+      toggleDrawer () {
+        this.drawerClosed = !this.drawerClosed
+      }
     }
   }
 </script>
@@ -48,6 +66,7 @@
   body {
     font-family: RobotoDraft, Roboto, sans-serif;
     margin: 0;
+    overflow: hidden;
   }
 
   * {
@@ -106,5 +125,42 @@
     .navigation-icon {
       font-size: 35px;
     }
+  }
+
+  .frequency-chart-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .drawer-open {
+    transform: translate(0px);
+    transition: all .5s ease-out;
+  }
+
+  .drawer-closed {
+      transform: translate(900px);
+      transition: all .5s ease-out;
+  }
+
+  .drawer-handle {
+    height: 500px;
+    width: 30px;
+    background-color: red;
+    border: none;
+
+    span {
+      text-orientation: sideways;
+      writing-mode: vertical-lr;
+    }
+  }
+
+  .drawer {
+    height: 80%;
+    width: 900px;
+    background-color: red;
   }
 </style>
