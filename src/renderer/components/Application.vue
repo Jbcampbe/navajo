@@ -126,7 +126,7 @@
 
     data () {
       return {
-        drawerClosed: false,
+        drawerClosed: true,
         frequencyMode: 1
       }
     },

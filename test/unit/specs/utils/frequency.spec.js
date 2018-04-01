@@ -1,69 +1,34 @@
 import { getSingleFrequencies, getDigramFrequencies, getTrigramFrequencies } from '@/utils/frequency'
 import { buildAlphabetMap } from '@/utils/alphabet'
 
-const message = 'thesecrettocountingfrequencies'
+const message = 'thethethethethedadadadadadalslskdididldldldididldld'
 
-const expectedSingleCounts = Object.assign(buildAlphabetMap(0), { t: 4, h: 1, e: 6, s: 2, c: 3, r: 2, o: 2, u: 2, n: 3, i: 2, g: 1, f: 1, q: 1 })
+const expectedSingleCounts = Object.assign(buildAlphabetMap(0), { a: 6, d: 16, e: 5, h: 5, i: 4, k: 1, l: 7, s: 2, t: 5 })
 
 const expectedDigramCounts = {
-  th: 1,
-  he: 1,
-  es: 2,
-  se: 1,
-  ec: 1,
-  cr: 1,
-  re: 2,
-  et: 1,
-  tt: 1,
-  to: 1,
-  oc: 1,
-  co: 1,
-  ou: 1,
-  un: 1,
-  nt: 1,
-  ti: 1,
-  in: 1,
-  ng: 1,
-  gf: 1,
-  fr: 1,
-  eq: 1,
-  qu: 1,
-  ue: 1,
-  en: 1,
-  nc: 1,
-  ci: 1,
-  ie: 1
+  da: 6,
+  th: 5,
+  dl: 5,
+  he: 5,
+  ld: 5,
+  ad: 5,
+  di: 4,
+  id: 4,
+  et: 4,
+  ls: 2
 }
 
 const expectedTrigramCounts = {
-  the: 1,
-  hes: 1,
-  ese: 1,
-  sec: 1,
-  ecr: 1,
-  cre: 1,
-  ret: 1,
-  ett: 1,
-  tto: 1,
-  toc: 1,
-  oco: 1,
-  cou: 1,
-  oun: 1,
-  unt: 1,
-  nti: 1,
-  tin: 1,
-  ing: 1,
-  ngf: 1,
-  gfr: 1,
-  fre: 1,
-  req: 1,
-  equ: 1,
-  que: 1,
-  uen: 1,
-  enc: 1,
-  nci: 1,
-  cie: 1,
-  ies: 1
+  the: 5,
+  dad: 5,
+  ada: 5,
+  dld: 5,
+  eth: 4,
+  het: 4,
+  did: 4,
+  ldl: 3,
+  idi: 2,
+  idl: 2
 }
 
 describe('frequency.js', () => {
