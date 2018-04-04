@@ -18,7 +18,7 @@
     <vodal :show="showShiftAllModal" animation="fade" @hide="showShiftAllModal=false" :closeButton="false" :width="600" :height="340">
       <div class="shift-modal">
         <div class="scrollable">
-          <div class="shift-container" v-for="(shift, index) in allShifts">
+          <div class="shift-container" :v-for="(shift, index) in allShifts">
             <span class="shift-index">{{index + 1}}</span>
             <span class="shift-text">{{shift}}</span>
           </div>
