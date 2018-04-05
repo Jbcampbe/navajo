@@ -4,8 +4,13 @@
   <textarea class="cipher-input ciphertext-input" :value="ciphertext" @input="updateCiphertext"></textarea>
 
   <div class="subs-worksheet">
-    <div v-for="letter in alphabet" class="letter">
-      {{letter}}
+    <div v-for="letter in alphabet">
+      <div class="letter">
+        {{letter}}
+      </div>
+      <input class="substitute" maxlength="1">
+      </input>
+
     </div>
   </div>
 
@@ -51,12 +56,23 @@
 </script>
 
 <style lang="scss">
+  .substitute {
+    border: 1px solid #E3341B;
+    background: rgba(255, 255, 255, .15);
+    border-radius: 2px;
+    color: #E3341B;
+    width: 15px;
+    font-size: 18px;
+    text-align: center;
+  }
+
   .subs-worksheet {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .letter {
+    text-align: center;
     color: #A4A6A6;
     font-size: 18px;
   }
