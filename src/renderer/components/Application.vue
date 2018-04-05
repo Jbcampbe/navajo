@@ -32,14 +32,14 @@
         <button class="drawer-handle" @click="toggleDrawer">
             <span>FREQUENCY</span>
         </button>
-        <div class="drawer">
+        <div id="drawer">
             <div class="chart-container">
               <highcharts :options="options"></highcharts>
             </div>
-            <div>
-              <button @click="showSingleLetterFrequencies">1</button>
-              <button @click="showDigramFrequencies">2</button>
-              <button @click="showTrigramFrequencies">3</button>
+            <div class="frequency-change-container">
+              <button class="change-frequency" :class="{ 'selected': frequencyMode === 1 }" @click="showSingleLetterFrequencies">1</button>
+              <button class="change-frequency" :class="{ 'selected': frequencyMode === 2 }" @click="showDigramFrequencies">2</button>
+              <button class="change-frequency" :class="{ 'selected': frequencyMode === 3 }" @click="showTrigramFrequencies">3</button>
             </div>
         </div>
     </div>
@@ -95,11 +95,10 @@
             },
             lineColor: '#FFFFFF',
             lineWidth: 3,
-            tickAmount: 0,
             gridLineColor: 'transparent',
             labels: {
               style: {
-                color: 'transparent'
+                color: '#FFFFFF'
               }
             }
           },
@@ -117,9 +116,17 @@
             backgroundColor: 'transparent',
             showAxes: true,
             height: 700,
-            width: 1000
+            width: 1100
           },
-          colors: ['#FFFFFF']
+          colors: ['#FFFFFF'],
+          tooltip: {
+            headerFormat: '<span style="font-size: 14px">{point.key}</span><br/>',
+            pointFormat: '<b>{point.y}</b><br/>',
+            valueDecimals: 2
+          },
+          credits: {
+            enabled: false
+          }
         }
       }
     },
@@ -152,7 +159,8 @@
 </script>
 
 <style lang="scss">
-  $drawer-size: calc(100vw * .8);
+  $drawer-size: calc(100vw * .75);
+  $drawer-translation: calc(100vw * .75 + 20px);
 
   body {
     font-family: RobotoDraft, Roboto, sans-serif;
@@ -233,15 +241,17 @@
   }
 
   .drawer-closed {
-      transform: translate($drawer-size);
+      transform: translate($drawer-translation);
       transition: all .5s ease-out;
   }
 
   .drawer-handle {
     height: 500px;
-    width: 30px;
+    width: 50px;
     background-color: #E3341B;
     border: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
 
     span {
       text-orientation: sideways;
@@ -252,15 +262,38 @@
     }
   }
 
-  .drawer {
-    height: 80%;
+  #drawer {
+    height: 75%;
     width: $drawer-size;
     background-color: #E3341B;
     display: flex;
     align-items: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    justify-content: flex-end;
+    padding-right: 20px;
+    overflow: hidden;
   }
 
-  .highcharts-credits {
-    display: none;
+  .change-frequency {
+    height: 60px;
+    width: 60px;
+    background: white;
+    border: none;
+    border-radius: 3px;
+    color: #E3341B;
+    font-size: 30px;
+    font-weight: 600;
+
+    &.selected {
+      background-color: #081830;
+    }
+  }
+
+  .frequency-change-container {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    justify-content: space-around;
   }
 </style>
