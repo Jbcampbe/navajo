@@ -28,13 +28,13 @@
         </router-link>
       </div>
     </nav>
-    <div class="frequency-chart-container" :class="{ 'drawer-closed': drawerClosed, 'drawer-open': !drawerClosed }">
+    <div class="frequency-chart-container" :class="{ 'drawer-closed': drawerClosed, 'drawer-open': !drawerClosed }" v-resize:debounce="recomputeChartSize">
         <button class="drawer-handle" @click="toggleDrawer">
             <span>FREQUENCY</span>
         </button>
         <div id="drawer">
             <div class="chart-container">
-              <highcharts :options="options"></highcharts>
+              <highcharts :options="options" ref="highcharts"></highcharts>
             </div>
             <div class="frequency-change-container">
               <button class="change-frequency" :class="{ 'selected': frequencyMode === 1 }" @click="showSingleLetterFrequencies">1</button>
@@ -49,11 +49,19 @@
 <script>
   import CipherInputs from '@/components/cipher-inputs'
   import { getSingleFrequencies, getDigramFrequencies, getTrigramFrequencies } from '@/utils/frequency'
+  import resize from 'vue-resize-directive'
 
   export default {
     name: 'application',
+    directives: {
+      resize
+    },
     components: {
       CipherInputs
+    },
+
+    mounted () {
+      this.recomputeChartSize()
     },
 
     computed: {
@@ -70,7 +78,7 @@
       options () {
         let frequencies = this.getFrequencies(this.$store.state.Cipher.ciphertext)
 
-        return {
+        let options = {
           title: {
             text: ''
           },
@@ -114,9 +122,7 @@
 
           chart: {
             backgroundColor: 'transparent',
-            showAxes: true,
-            height: 700,
-            width: 1100
+            showAxes: true
           },
           colors: ['#FFFFFF'],
           tooltip: {
@@ -128,6 +134,17 @@
             enabled: false
           }
         }
+
+        let drawerElem = document.getElementById('drawer')
+        if (drawerElem) {
+          let chartWidth = drawerElem.clientWidth - 150
+          let chartHeight = drawerElem.clientHeight - 50
+
+          options.chart.width = chartWidth
+          options.chart.height = chartHeight
+        }
+
+        return options
       }
     },
 
@@ -153,6 +170,19 @@
 
       showTrigramFrequencies () {
         this.frequencyMode = 3
+      },
+
+      recomputeChartSize () {
+        let drawerElem = document.getElementById('drawer')
+        let chartWidth = drawerElem.clientWidth - 150
+        let chartHeight = drawerElem.clientHeight - 50
+
+        this.$refs.highcharts.chart.update({
+          chart: {
+            width: chartWidth,
+            height: chartHeight
+          }
+        })
       }
     }
   }
