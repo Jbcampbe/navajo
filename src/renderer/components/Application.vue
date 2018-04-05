@@ -2,7 +2,7 @@
   <div class="application-root">
     <div class="main-content">
       <router-view></router-view>
-      <cipher-inputs/>
+      <cipher-inputs-sub/>
     </div>
     <nav class="navigation-bar">
       <div class="link-container">
@@ -34,12 +34,12 @@
 </template>
 
 <script>
-  import CipherInputs from '@/components/cipher-inputs'
+  import CipherInputsSub from '@/components/cipher-inputs-sub'
 
   export default {
     name: 'application',
     components: {
-      CipherInputs
+      CipherInputsSub
     }
   }
 </script>

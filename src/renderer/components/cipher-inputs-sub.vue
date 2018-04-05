@@ -3,6 +3,11 @@
   <span class="input-label">CYPHERTEXT</span>
   <textarea class="cipher-input ciphertext-input" :value="ciphertext" @input="updateCiphertext"></textarea>
 
+  <div class="subs-worksheet">
+    <div v-for="letter in alphabet" class="letter">
+      {{letter}}
+    </div>
+  </div>
 
 
   <span class="input-label">PLAINTEXT</span>
@@ -15,8 +20,13 @@
 
   export default {
 
-    name: 'cipher-inputs',
-    alphabet: alphabet,
+    name: 'cipher-inputs-sub',
+
+    data () {
+      return {
+        alphabet
+      }
+    },
 
     computed: {
       ciphertext () {
@@ -41,6 +51,16 @@
 </script>
 
 <style lang="scss">
+  .subs-worksheet {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .letter {
+    color: #A4A6A6;
+    font-size: 18px;
+  }
+
   .cipher-inputs-container {
     display: flex;
     flex-direction: column;
