@@ -1,4 +1,7 @@
-import { runShifts, decipherCeaser, decipherKeyword, addLetterMapping, clearLetterMapping, alphabetMap } from '@/utils/monoalphabetic'
+import { runShifts, decipherCeaser, decipherKeyword, addLetterMapping, clearLetterMapping } from '@/utils/monoalphabetic'
+import { buildAlphabetMap } from '@/utils/alphabet'
+
+const alphabetMap = buildAlphabetMap(' ')
 
 const shiftMessage = 'bpqaqabwmvaczmbpibbpmapqnbqaewzsqvoxzwxmztg'
 const shiftPlaintext = 'thisistoensurethattheshiftisworkingproperly'

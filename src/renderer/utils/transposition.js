@@ -14,7 +14,7 @@ function decipherAnagram (message, perms) {
     newBlock = []
 
     for (let j = 0; j < blockSize; j++) {
-      newBlock[i + perms[j]] = message[i + j]
+      newBlock[i + perms[j] - 1] = message[i + j]
     }
 
     decryptedMessage = decryptedMessage.concat(newBlock)
@@ -56,12 +56,12 @@ function decipherColumnarTransposition (message, perms) {
  */
 function isPermutedColumns (perms) {
   for (let i = 0; i < perms.length; i++) {
-    if (perms[i] !== i) {
-      return false
+    if (perms[i] !== (i + 1)) {
+      return true
     }
   }
 
-  return true
+  return false
 }
 
-export { decipherAnagram, decipherColumnarTransposition }
+export { decipherAnagram, decipherColumnarTransposition, isPermutedColumns }
