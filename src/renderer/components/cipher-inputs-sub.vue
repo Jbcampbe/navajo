@@ -39,7 +39,8 @@
       },
 
       plaintext () {
-        return decipherKeyword(this.$store.state.Cipher.ciphertext, this.map)
+        let results = decipherKeyword(this.$store.state.Cipher.ciphertext, this.map)
+        return results.replace(/a/g, '<span class="color-red">a</span>')
       }
     },
 
