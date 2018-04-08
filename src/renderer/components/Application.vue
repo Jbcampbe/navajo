@@ -152,7 +152,7 @@
     }
 
     .drawer-handle {
-      height: 500px;
+      height: 50vh;
       width: 50px;
       background-color: #E3341B;
       border: none;
