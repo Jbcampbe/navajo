@@ -51,7 +51,11 @@ function decipherCeaser (message, shiftAmt) {
 function decipherKeyword (message, keyMap) {
   let decryptedMessage = ''
   for (let i = 0; i < message.length; i++) {
-    decryptedMessage = decryptedMessage.concat(keyMap[message[i]])
+    if (keyMap[message[i]] !== '') {
+      decryptedMessage = decryptedMessage.concat(keyMap[message[i]])
+    } else {
+      decryptedMessage = decryptedMessage.concat(message[i])
+    }
   }
 
   return decryptedMessage
