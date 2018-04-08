@@ -4,13 +4,11 @@
   <textarea class="cipher-input ciphertext-input" :value="ciphertext" @input="updateCiphertext"></textarea>
 
   <div class="subs-worksheet">
-    <div v-for="letter in alphabet">
+    <div v-for="(letter) in alphabet" :key="letter.id">
       <div class="letter">
         {{letter}}
       </div>
-      <input class="substitute" maxlength="1">
-      </input>
-
+      <input class="substitute" maxlength="1" v-bind:id="letter" v-model="map[letter]">
     </div>
   </div>
 
@@ -21,7 +19,8 @@
 </template>
 
 <script>
-  import { alphabet } from '@/utils/alphabet'
+  import { alphabet, buildAlphabetMap } from '@/utils/alphabet'
+  import { decipherKeyword } from '@/utils/monoalphabetic'
 
   export default {
 
@@ -29,7 +28,8 @@
 
     data () {
       return {
-        alphabet
+        alphabet,
+        map: buildAlphabetMap('')
       }
     },
 
@@ -39,7 +39,7 @@
       },
 
       plaintext () {
-        return this.$store.state.Cipher.plaintext
+        return decipherKeyword(this.$store.state.Cipher.ciphertext, this.map)
       }
     },
 
