@@ -6,6 +6,10 @@ function getSingleFrequencies (message) {
     counts[letter] = counts[letter] ? counts[letter] + 1 : 1
   })
 
+  Object.keys(counts).forEach(letter => {
+    counts[letter] = counts[letter] / message.length
+  })
+
   return counts
 }
 
@@ -16,7 +20,11 @@ function getDigramFrequencies (message) {
     counts[digram] = counts[digram] ? counts[digram] + 1 : 1
   }
 
-  return counts
+  let top10Entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10)
+  let top10Counts = {}
+  top10Entries.forEach(entry => { top10Counts[entry[0]] = entry[1] / message.length })
+
+  return top10Counts
 }
 
 function getTrigramFrequencies (message) {
@@ -26,7 +34,11 @@ function getTrigramFrequencies (message) {
     counts[digram] = counts[digram] ? counts[digram] + 1 : 1
   }
 
-  return counts
+  let top10Entries = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10)
+  let top10Counts = {}
+  top10Entries.forEach(entry => { top10Counts[entry[0]] = entry[1] / message.length })
+
+  return top10Counts
 }
 
 export { getSingleFrequencies, getDigramFrequencies, getTrigramFrequencies }

@@ -13,4 +13,5 @@
 <style>
   @import "vodal/common.css";
   @import "vodal/rotate.css";
+  @import "./styles/material-icons.css";
 </style>
