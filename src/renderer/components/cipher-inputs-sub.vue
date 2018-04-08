@@ -14,13 +14,12 @@
 
 
   <span class="input-label">PLAINTEXT</span>
-  <textarea class="cipher-input plaintext-input" :value="plaintext" @input="updatePlaintext"></textarea>
+  <div class="cipher-input plaintext-input" v-html="plaintext" @input="updatePlaintext"></div>
 </div>
 </template>
 
 <script>
   import { alphabet, buildAlphabetMap } from '@/utils/alphabet'
-  import { decipherKeyword } from '@/utils/monoalphabetic'
 
   export default {
 
@@ -39,8 +38,18 @@
       },
 
       plaintext () {
-        let results = decipherKeyword(this.$store.state.Cipher.ciphertext, this.map)
-        return results.replace(/a/g, '<span class="color-red">a</span>')
+        var ciphertext = this.$store.state.Cipher.ciphertext
+        var results = ''
+
+        for (let i = 0; i < ciphertext.length; i++) {
+          if (this.map[ciphertext[i]] !== '') {
+            results = results.concat('<span style="color: #E3341B">' + this.map[ciphertext[i]] + '</span>')
+          } else {
+            results = results.concat(ciphertext[i])
+          }
+        }
+
+        return results
       }
     },
 
@@ -97,5 +106,10 @@
     font-size: 20px;
     border-radius: 5px;
     border: 1px solid #707070;
+  }
+
+  .plaintext-input {
+    background: white;
+    color: #D9D9D9;
   }
 </style>
