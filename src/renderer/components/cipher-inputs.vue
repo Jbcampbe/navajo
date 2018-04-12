@@ -38,7 +38,7 @@
   .cipher-inputs-container {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 80%;
   }
 
   .input-label {
@@ -50,7 +50,7 @@
 
   .cipher-input {
     resize: none;
-    height: 300px;
+    height: 150px;
     font-size: 20px;
     border-radius: 5px;
     border: 1px solid #707070;

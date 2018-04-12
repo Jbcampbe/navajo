@@ -2,7 +2,6 @@
   <div class="application-root">
     <div class="main-content">
       <router-view></router-view>
-      <cipher-inputs-sub/>
     </div>
     <nav class="navigation-bar">
       <div class="link-container">

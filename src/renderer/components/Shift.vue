@@ -1,42 +1,49 @@
 <template>
-  <div class="crypto-tool-list">
-    <button class="action-btn" v-on:click="openShiftModal">SHIFT</button>
-    <button class="action-btn" v-on:click="openShiftAllModal">SHIFT ALL</button>
-    <vodal :show="showShiftModal" animation="fade" @hide="showShiftModal=false" :closeButton="false" :width="300" :height="140">
-        <div class="shift-modal">
-          <div class="shift-modal-body">
-            <span class="enter-shift-text">Enter shift amount</span>
-            <input class="shift-input" v-model="shiftAmt"/>
+  <div class="view">
+    <div class="crypto-tool-list">
+      <button class="action-btn" v-on:click="openShiftModal">SHIFT</button>
+      <button class="action-btn" v-on:click="openShiftAllModal">SHIFT ALL</button>
+      <vodal :show="showShiftModal" animation="fade" @hide="showShiftModal=false" :closeButton="false" :width="300" :height="140">
+          <div class="shift-modal">
+            <div class="shift-modal-body">
+              <span class="enter-shift-text">Enter shift amount</span>
+              <input class="shift-input" v-model="shiftAmt"/>
+            </div>
+            <div class="shift-modal-footer">
+              <button class="modal-btn cancel" v-on:click="closeShiftModal">CANCEL</button>
+              <button class="modal-btn shift" v-on:click="performShift">SHIFT</button>
+            </div>
           </div>
-          <div class="shift-modal-footer">
-            <button class="modal-btn cancel" v-on:click="closeShiftModal">CANCEL</button>
-            <button class="modal-btn shift" v-on:click="performShift">SHIFT</button>
-          </div>
-        </div>
-    </vodal>
+      </vodal>
 
-    <vodal :show="showShiftAllModal" animation="fade" @hide="showShiftAllModal=false" :closeButton="false" :width="600" :height="340">
-      <div class="shift-modal">
-        <div class="scrollable">
-          <div class="shift-container" v-for="(shift, index) in allShifts" :key="shift.id">
-            <span class="shift-index">{{index + 1}}</span>
-            <span class="shift-text">{{shift}}</span>
+      <vodal :show="showShiftAllModal" animation="fade" @hide="showShiftAllModal=false" :closeButton="false" :width="600" :height="340">
+        <div class="shift-modal">
+          <div class="scrollable">
+            <div class="shift-container" v-for="(shift, index) in allShifts" :key="shift.id">
+              <span class="shift-index">{{index + 1}}</span>
+              <span class="shift-text">{{shift}}</span>
+            </div>
+          </div>
+          <div class="shift-all-modal-footer">
+            <button class="close-all-shifts-btn" v-on:click="closeShiftAllModal">DONE</button>
           </div>
         </div>
-        <div class="shift-all-modal-footer">
-          <button class="close-all-shifts-btn" v-on:click="closeShiftAllModal">DONE</button>
-        </div>
-      </div>
-    </vodal>
+      </vodal>
+    </div>
+    <div class="inputs">
+        <cipher-inputs/>
+    </div>
   </div>
 </template>
 
 <script>
   import Vodal from 'vodal'
+  import cipherInputs from '@/components/cipher-inputs'
   import { decipherCeaser, runShifts } from '@/utils/monoalphabetic'
 
   export default {
     name: 'shift',
+
     data () {
       return {
         showShiftModal: false,
@@ -45,7 +52,8 @@
       }
     },
     components: {
-      Vodal
+      Vodal,
+      cipherInputs
     },
     computed: {
       allShifts () {
@@ -189,5 +197,15 @@
     border-radius: 3px;
     border: 1px solid #081830;
     text-align: center;
+  }
+
+  .view {
+    display: flex;
+    width: 100vw;
+    height: calc(100vh - 100px);
+  }
+
+  .inputs {
+    flex: auto;
   }
 </style>
