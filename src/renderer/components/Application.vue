@@ -33,13 +33,8 @@
 </template>
 
 <script>
-  import CipherInputsSub from '@/components/cipher-inputs-sub'
-
   export default {
-    name: 'application',
-    components: {
-      CipherInputsSub
-    }
+    name: 'application'
   }
 </script>
 
