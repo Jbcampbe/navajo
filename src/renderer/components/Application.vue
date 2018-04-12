@@ -5,43 +5,71 @@
     </div>
     <nav class="navigation-bar">
       <div class="link-container">
-        <router-link to="/shift">
+        <router-link class="nav-link" to="/shift">
           <i class="material-icons navigation-icon">keyboard_tab</i>
           <span class="link-text">CAESAR</span>
         </router-link>
-        <router-link to="/vigenere">
+        <router-link class="nav-link" to="/vigenere">
           <i class="material-icons navigation-icon">grid_on</i>
           <span class="link-text">VIGENERE</span>
         </router-link>
-        <router-link to="/anagram">
+        <router-link class="nav-link" to="/anagram">
           <i class="material-icons navigation-icon">swap_horiz</i>
           <span class="link-text">ANAGRAM</span>
         </router-link>
-        <router-link to="/columnar">
+        <router-link class="nav-link" to="/columnar">
           <i class="material-icons navigation-icon">view_column</i>
           <span class="link-text">COLUMNAR</span>
         </router-link>
-        <router-link to="/substitution">
+        <router-link class="nav-link" to="/substitution">
           <i class="material-icons navigation-icon">space_bar</i>
           <span class="link-text">SUBSTITUTION</span>
         </router-link>
       </div>
     </nav>
-    <div class="frequency-menu-container">
+    <div class="drawer-container" :class="{ 'drawer-closed': drawerClosed, 'drawer-open': !drawerClosed }">
+        <button class="drawer-handle" @click="toggleDrawer">
+            <span>FREQUENCY</span>
+        </button>
+        <div class="drawer-content">
+          <frequency-chart></frequency-chart>
+        </div>
     </div>
   </div>
 </template>
 
 <script>
+  import FrequencyChart from '@/components/frequency-chart'
+
   export default {
-    name: 'application'
+    name: 'application',
+
+    components: {
+      FrequencyChart
+    },
+
+    data () {
+      return {
+        drawerClosed: true
+      }
+    },
+
+    methods: {
+      toggleDrawer () {
+        this.drawerClosed = !this.drawerClosed
+      }
+    }
   }
 </script>
 
 <style lang="scss">
+  $drawer-size: calc(100vw * .75);
+  $drawer-translation: calc(100vw * .75 + 20px);
+
   body {
     font-family: RobotoDraft, Roboto, sans-serif;
     margin: 0;
+    overflow: hidden;
   }
 
   * {
@@ -80,7 +108,7 @@
       justify-content: space-around;
     }
 
-    a {
+    .nav-link {
       width: 100px;
       height: 85px;
       justify-content: center;
@@ -99,6 +127,52 @@
 
     .navigation-icon {
       font-size: 35px;
+    }
+  }
+
+  .drawer-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    &.drawer-open {
+      transform: translate(0px);
+      transition: all .5s ease-out;
+    }
+
+    &.drawer-closed {
+        transform: translate($drawer-translation);
+        transition: all .5s ease-out;
+    }
+
+    .drawer-handle {
+      height: 50vh;
+      width: 50px;
+      background-color: #E3341B;
+      border: none;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+
+      span {
+        text-orientation: sideways;
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+        color: white;
+        font-size: 14px;
+      }
+    }
+
+    .drawer-content {
+      height: 75%;
+      width: $drawer-size;
+      background-color: #E3341B;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      padding-right: 20px;
+      overflow: hidden;
     }
   }
 </style>
