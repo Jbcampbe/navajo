@@ -50,7 +50,7 @@
 
   .cipher-input {
     resize: none;
-    height: 150px;
+    height: 30vh;
     font-size: 20px;
     border-radius: 5px;
     border: 1px solid #707070;

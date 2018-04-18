@@ -95,14 +95,14 @@
 
   .input-label {
     color: #A4A6A6;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 5px;
     padding-left: 19px;
   }
 
   .cipher-input {
     resize: none;
-    height: 150px;
+    height: 30vh;
     font-size: 20px;
     border-radius: 5px;
     border: 1px solid #707070;
@@ -111,5 +111,7 @@
   .plaintext-input {
     background: white;
     color: #D9D9D9;
+    overflow-x: hidden;
+    word-break: break-all;
   }
 </style>
