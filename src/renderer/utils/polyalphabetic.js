@@ -95,17 +95,17 @@ function lowFrequencyAnalysis (message, numAlphabets) {
   let potentialKey = ''
   for (let i = 0; i < subtexts.length; i++) {
     let shifts = runShifts(subtexts[i])
-    let maxIdx = 0
-    let maxMse = 0
+    let minIdx = 0
+    let minMse = 100
     shifts.forEach((shift, index) => {
       frequencies = getSingleFrequencies(shift)
       let mse = meanSquaredError(frequencies, englishFrequencies)
-      if (mse > maxMse) {
-        maxMse = mse
-        maxIdx = index
+      if (mse < minMse) {
+        minMse = mse
+        minIdx = index
       }
     })
-    potentialKey = potentialKey.concat(alphabet[25 - maxIdx])
+    potentialKey = potentialKey.concat(alphabet[minIdx])
   }
   return potentialKey
 }
