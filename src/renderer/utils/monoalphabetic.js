@@ -11,7 +11,7 @@ const alphabetMap = buildAlphabetMap(' ')
 function runShifts (message) {
   const shifts = []
   let decryptedMessage
-  for (let i = 1; i < 26; i++) {
+  for (let i = 0; i < 26; i++) {
     decryptedMessage = decipherCeaser(message, i)
     shifts.push(decryptedMessage)
   }

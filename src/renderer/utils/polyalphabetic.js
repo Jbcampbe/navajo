@@ -1,10 +1,12 @@
 import { alphabet } from './alphabet'
+import { getSingleFrequencies, englishFrequencies } from './frequency'
+import { runShifts } from './monoalphabetic'
 
 /**
  * decrypts vigenere ciphers
  *
- * @param  {string} message - encrypted message. should be all lowercase with no spaces
- * @param  {string} keyword - keyword for the decrypting
+ * @param {string} message - encrypted message. should be all lowercase with no spaces
+ * @param {string} keyword - keyword for the decrypting
  * @returns {string} - plaintext message
  */
 function decipherVigenere (message, keyword) {
@@ -26,6 +28,12 @@ function decipherVigenere (message, keyword) {
   return decryptedMessage
 }
 
+/**
+ * performs kasiski analysis
+ *
+ * @param {string} message - encrypted message to analyze. should be all lowercase with no spaces
+ * @returns {array} - factors for potential key sizes
+ */
 function kasiski (message) {
   let previousPatternIdxs = {}
   let distances = []
@@ -52,42 +60,112 @@ function kasiski (message) {
   return factorCounts
 }
 
-function findPrimeFactors (num) {
-  let factors = []
-  let factornums = []
-  let arrada = []
+/**
+ * performs IC (Index of Coincidence) analysis
+ *
+ * @param {string} message - encrypted message to analyze. should be all lowercase with no spaces
+ * @param {number} numAlphabets - number of alphabets to use for ic analysis
+ * @returns {array} - factors for potential key sizes
+ */
+function ic (message, numAlphabets) {
+    let subtexts = splitMessage(message, numAlphabets)
 
-  for (coun = 2; coun <= num/2; coun++) {
-    if (num % coun == 0) {
-      factornums.push(coun)
+    ics = new Array(numAlphabets).fill(0)
+    for (let i = 0; i < numAlphabets; i++) {
+        let counts = {}
+        let n = subtexts[i].length
+        for (let j = 0; j < n; j++) {
+            counts[subtexts[i][j]] = counts[subtexts[i][j]] ? counts[subtexts[i][j]] + 1 : 1
+        }
+        ics[i] = Object.values(counts).reduce((sum, value) => sum + (value * (value - 1))) / (n * (n - 1))
     }
-  }
 
-  for (i = 0; i < factornums.length; i++) {
-    if (primecheck(factornums[i])) {
-      factors.push(factornums[i])
-    }
-  }
-
-  for (i = 0; i < factors.length; i++) {
-    rightnow = factors[i]
-    while (num % rightnow == 0) {
-      arrada.push(factors[i])
-      rightnow = rightnow * factors[i]
-    }
-  }
-
-  return arrada
+    return ics
 }
 
-function primecheck (num){
+/**
+ * performs Low Frequency analysis
+ *
+ * @param {string} message - encrypted message to analyze. should be all lowercase with no spaces
+ * @param {number} numAlphabets - number of alphabets to use for low frequency analysis
+ * @returns {array} - potential vigenere key
+ */
+function lowFrequencyAnalysis (message, numAlphabets) {
+  let subtexts = splitMessage(message, numAlphabets)
+  let potentialKey = ''
+  for (let i = 0; i < subtexts.length; i++) {
+    let shifts = runShifts(subtexts[i])
+    let maxIdx = 0
+    let maxMse = 0
+    shifts.forEach((shift, index) => {
+      frequencies = getSingleFrequencies(shift)
+      let mse = meanSquaredError(frequencies, englishFrequencies)
+      if (mse > maxMse) {
+        maxMse = mse
+        maxIdx = index
+      }
+    })
+    potentialKey = potentialKey.concat(alphabet[25 - maxIdx])
+  }
+  return potentialKey
+}
+
+function meanSquaredError(frequencyMap) {
+  let freqs = Object.values(frequencyMap)
+  let expectedFreqs = Object.values(englishFrequencies)
+  let mse = 0;
+  for (let i = 0; i < 26; i++) {
+    if (freqs[i] > 0) {
+      mse += (expectedFreqs[i] - freqs[i]) ** 2
+    }
+  }
+  return mse
+}
+
+function splitMessage (message, numAlphabets) {
+  let subtexts = new Array(numAlphabets).fill('')
+  for (let i = 0; i < message.length; i++) {
+      subtexts[i % numAlphabets] = subtexts[i % numAlphabets].concat(message[i])
+  }
+  return subtexts
+}
+
+function findPrimeFactors (num) {
+  if (isPrime(num)) {
+    return [num]
+  }
+
+  let prime = 2
+  let factors = []
+
+  while (num != 1) {
+    if (num % prime === 0) {
+      num = num / prime
+      factors.push(prime)
+    } else {
+      prime = findNextPrime(prime)
+    }
+  }
+
+  return factors
+}
+
+function findNextPrime (prime) {
+  for (let i = prime + 1; true; i++) {
+    if (isPrime(i)) {
+      return i
+    }
+  }
+}
+
+function isPrime (num){
   let primestate = true;
-  for (coun = 2; coun <= Math.sqrt(num); coun++) {
-    if (num % coun == 0) {
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i == 0) {
       primestate = false
     }
   }
   return primestate
 }
 
-export { decipherVigenere }
+export { decipherVigenere, kasiski }

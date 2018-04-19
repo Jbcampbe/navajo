@@ -1,5 +1,34 @@
 import { buildAlphabetMap } from '@/utils/alphabet'
 
+const englishFrequencies = {
+  a: .08167,
+  b: .01492,
+  c: .02782,
+  d: .04253,
+  e: .12702,
+  f: .02228,
+  g: .02015,
+  h: .06094,
+  i: .06966,
+  j: .00153,
+  k: .00772,
+  l: .04025,
+  m: .02406,
+  n: .06749,
+  o: .07507,
+  p: .01929,
+  q: .00095,
+  r: .05987,
+  s: .06327,
+  t: .09056,
+  u: .02758,
+  v: .00978,
+  w: .02360,
+  x: .00150,
+  y: .01974,
+  z: .00074
+}
+
 function getSingleFrequencies (message) {
   let counts = buildAlphabetMap(0)
   message.split('').forEach(letter => {
@@ -41,4 +70,4 @@ function getTrigramFrequencies (message) {
   return top10Counts
 }
 
-export { getSingleFrequencies, getDigramFrequencies, getTrigramFrequencies }
+export { getSingleFrequencies, getDigramFrequencies, getTrigramFrequencies, englishFrequencies }
