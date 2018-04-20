@@ -2,7 +2,6 @@
   <div class="application-root">
     <div class="main-content">
       <router-view></router-view>
-      <cipher-inputs/>
     </div>
     <nav class="navigation-bar">
       <div class="link-container">
@@ -40,14 +39,12 @@
 </template>
 
 <script>
-  import CipherInputs from '@/components/cipher-inputs'
   import FrequencyChart from '@/components/frequency-chart'
 
   export default {
     name: 'application',
 
     components: {
-      CipherInputs,
       FrequencyChart
     },
 
