@@ -168,4 +168,4 @@ function isPrime (num){
   return primestate
 }
 
-export { decipherVigenere, kasiski }
+export { decipherVigenere, kasiski, ic, lowFrequencyAnalysis }
