@@ -8,7 +8,7 @@
       <div class="letter">
         {{letter}}
       </div>
-      <input class="substitute" maxlength="1" v-bind:id="letter" v-model="map[letter]">
+      <input class="substitute" maxlength="1" v-bind:id="letter" v-bind:class="{ error : errorMap[letter] }" @input="updateMap(letter, $event)">
     </div>
   </div>
 
@@ -28,7 +28,8 @@
     data () {
       return {
         alphabet,
-        map: buildAlphabetMap('')
+        map: buildAlphabetMap(''),
+        errorMap: buildAlphabetMap(false)
       }
     },
 
@@ -56,6 +57,23 @@
     methods: {
       updateCiphertext (e) {
         this.$store.commit('updateCiphertext', e.target.value)
+      },
+
+      updateMap (letter, e) {
+        this.map[letter] = e.target.value
+
+        var values = Object.values(this.map)
+        var keys = Object.keys(this.map)
+        for (var i = 0; i < Object.values(this.map).length; i++) {
+          if (values.indexOf(values[i]) !== values.lastIndexOf(values[i]) && values[i] !== '') {
+            console.log('true')
+            this.errorMap[keys[i]] = true
+          } else {
+            console.log('false')
+            this.errorMap[keys[i]] = false
+          }
+        }
+        console.log(this.errorMap)
       },
 
       updatePlaintext (e) {
@@ -113,5 +131,10 @@
     color: #D9D9D9;
     overflow-x: hidden;
     word-break: break-all;
+  }
+
+  .error {
+    background: #E3341B;
+    color: #353C50;
   }
 </style>
