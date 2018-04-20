@@ -13,7 +13,12 @@
 
       <button class="action-btn" v-bind:class = '{open: showIC}' @click="showIC = !showIC">IC</button>
       <div class="vigenere-tool kasiki" :class="{ hidden: !showIC }">
-        <span>Possible Key Factors:</span>
+        <div class="ic-header">
+          <span>Key length:</span>
+          <button class="material-icons change-ic-arrow" @click="decrementIc"> keyboard_arrow_left </button>
+          <div class='ic-length'>{{icLength}}</div>
+          <button class="material-icons change-ic-arrow" @click="incrementIc"> keyboard_arrow_right </button>
+        </div>
         <span>2, 3, 5</span>
       </div>
 
@@ -44,7 +49,18 @@
       return {
         showKasiski: false,
         showIC: false,
-        showLFA: false
+        showLFA: false,
+        icLength: 5
+      }
+    },
+
+    methods: {
+      incrementIc () {
+        this.icLength = this.icLength + 1
+      },
+
+      decrementIc () {
+        this.icLength = Math.max(0, this.icLength - 1)
       }
     },
 
@@ -80,12 +96,37 @@
 
   }
 
+  .change-ic-arrow {
+    color: #E3341B;
+    width: 30px;
+    font-size: 30px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    line-height: 10px;
+    height: 20px;
+    text-align: center;
+  }
+
   .hidden {
     display: none;
+  }
+
+  .ic-length {
+    text-align: center;
+    background-color: white;
+    display: inline-block;
+    opacity: 1;
+    color: #081830;
+    font-size: 18px;
   }
 
   .open {
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
+  }
+
+  .ic-header {
+    display: flex;
   }
 </style>
