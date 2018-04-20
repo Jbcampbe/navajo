@@ -39,8 +39,8 @@
       },
 
       plaintext () {
-        var ciphertext = this.$store.state.Cipher.ciphertext
-        var results = ''
+        let ciphertext = this.$store.state.Cipher.ciphertext
+        let results = ''
 
         for (let i = 0; i < ciphertext.length; i++) {
           if (this.map[ciphertext[i]] !== '') {
@@ -62,18 +62,15 @@
       updateMap (letter, e) {
         this.map[letter] = e.target.value
 
-        var values = Object.values(this.map)
-        var keys = Object.keys(this.map)
-        for (var i = 0; i < Object.values(this.map).length; i++) {
+        let values = Object.values(this.map)
+        let keys = Object.keys(this.map)
+        for (let i = 0; i < values.length; i++) {
           if (values.indexOf(values[i]) !== values.lastIndexOf(values[i]) && values[i] !== '') {
-            console.log('true')
             this.errorMap[keys[i]] = true
           } else {
-            console.log('false')
             this.errorMap[keys[i]] = false
           }
         }
-        console.log(this.errorMap)
       },
 
       updatePlaintext (e) {
@@ -97,6 +94,7 @@
   .subs-worksheet {
     display: flex;
     justify-content: space-around;
+    width: 60vw;
   }
 
   .letter {
@@ -105,33 +103,14 @@
     font-size: 18px;
   }
 
-  .cipher-inputs-container {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-  }
-
-  .input-label {
-    color: #A4A6A6;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    padding-left: 19px;
-  }
-
-  .cipher-input {
-    resize: none;
-    height: 30vh;
-    font-size: 20px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-  }
-
   .plaintext-input {
     background: white;
     color: #D9D9D9;
     overflow-x: hidden;
     word-break: break-all;
     white-space: pre-wrap;
+    width: calc(60vw - 45px);
+    padding-right: 45px;
   }
 
   .error {

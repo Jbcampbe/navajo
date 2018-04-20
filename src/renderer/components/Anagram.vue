@@ -32,21 +32,4 @@
 </script>
 
 <style>
-  .crypto-tool-list {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    padding: 27px;
-    align-items: center;
-    min-width: 200px;
-  }
-  .view {
-    display: flex;
-    width: 100vw;
-    height: calc(100vh - 100px);
-  }
-
-  .inputs {
-    flex: auto;
-  }
 </style>

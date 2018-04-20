@@ -10,8 +10,9 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   @import "vodal/common.css";
   @import "vodal/rotate.css";
   @import "./styles/material-icons.css";
+  @import "./styles/global-styles.scss";
 </style>

@@ -87,29 +87,6 @@
 </script>
 
 <style lang="scss">
-  .crypto-tool-list {
-    display: flex;
-    flex-direction: column;
-    width: 20%;
-    padding: 27px;
-    align-items: center;
-    min-width: 200px;
-  }
-
-  .action-btn {
-    width: 100%;
-    max-width: 250px;
-    height: 65px;
-    background-color: #E3341B;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 17px;
-    margin-top: 30px;
-    cursor: pointer;
-    outline: none;
-  }
-
   .shift-container {
     word-wrap: break-word;
     padding: 0 5px 0 5px;
@@ -197,15 +174,5 @@
     border-radius: 3px;
     border: 1px solid #081830;
     text-align: center;
-  }
-
-  .view {
-    display: flex;
-    width: 100vw;
-    height: calc(100vh - 100px);
-  }
-
-  .inputs {
-    flex: auto;
   }
 </style>

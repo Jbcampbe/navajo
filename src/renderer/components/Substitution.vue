@@ -17,14 +17,5 @@
     }
   }
 </script>
-<style lang="scss">
-  .view {
-    display: flex;
-    width: 100vw;
-    height: calc(100vh - 100px);
-  }
-
-  .inputs {
-    flex: auto;
-  }
+<style>
 </style>
