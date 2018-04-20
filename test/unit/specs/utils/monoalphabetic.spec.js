@@ -41,7 +41,7 @@ const letterMap = {
 describe('monoalphabetic.js', () => {
   it('should generate all possible shifts', () => {
     let possibleShifts = runShifts(shiftMessage)
-    expect(possibleShifts.length).to.equal(25)
+    expect(possibleShifts.length).to.equal(26)
     expect(possibleShifts).to.contain(shiftPlaintext)
   })
 
