@@ -51,7 +51,11 @@ function decipherCeaser (message, shiftAmt) {
 function decipherKeyword (message, keyMap) {
   let decryptedMessage = ''
   for (let i = 0; i < message.length; i++) {
-    decryptedMessage = decryptedMessage.concat(keyMap[message[i]])
+    if (keyMap[message[i]] !== '') {
+      decryptedMessage = decryptedMessage.concat(keyMap[message[i]])
+    } else {
+      decryptedMessage = decryptedMessage.concat(message[i])
+    }
   }
 
   return decryptedMessage
@@ -66,11 +70,12 @@ function decipherKeyword (message, keyMap) {
  * @param {string} plaintextLetter - the new value to add to the alphabet map
  */
 function addLetterMapping (alphabetMap, ciphertextLetter, plaintextLetter) {
-  if (Object.values(alphabetMap).includes(plaintextLetter)) {
+  if (Object.values(alphabetMap).includes(plaintextLetter.toLowerCase()) && plaintextLetter !== '') {
+    alphabetMap[ciphertextLetter] = ''
     return false
   }
 
-  alphabetMap[ciphertextLetter] = plaintextLetter
+  alphabetMap[ciphertextLetter] = plaintextLetter.toLowerCase()
   return true
 }
 
