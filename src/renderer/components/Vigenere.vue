@@ -23,15 +23,23 @@
         <span>2, 3, 5</span>
       </div>
     </div>
+    <div class="inputs">
+      <cipher-inputs/>
+    </div>
   </div>
 </template>
 
 <script>
   // import { decipherVigenere, kasiski, ic, lowFrequencyAnalysis } from '@/utils/polyalphabetic'
   import { kasiski } from '@/utils/polyalphabetic'
+  import cipherInputs from '@/components/cipher-inputs'
 
   export default {
     name: 'vigenere',
+    components: {
+      cipherInputs
+    },
+
     data () {
       return {
         showKasiski: false,
