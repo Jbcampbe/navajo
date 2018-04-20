@@ -131,6 +131,7 @@
     color: #D9D9D9;
     overflow-x: hidden;
     word-break: break-all;
+    white-space: pre-wrap;
   }
 
   .error {
