@@ -1,8 +1,8 @@
 <template>
   <div class="view">
     <div class="crypto-tool-list">
-      <button class="action-btn" v-on:click="openShiftModal">SHIFT</button>
-      <button class="action-btn" v-on:click="openShiftAllModal">SHIFT ALL</button>
+      <button class="action-btn" @click="showShiftModal=true">SHIFT</button>
+      <button class="action-btn" @click="showShiftAllModal=true">SHIFT ALL</button>
       <vodal :show="showShiftModal" animation="fade" @hide="showShiftModal=false" :closeButton="false" :width="300" :height="140">
           <div class="shift-modal">
             <div class="shift-modal-body">
@@ -10,8 +10,8 @@
               <input class="shift-input" v-model="shiftAmt"/>
             </div>
             <div class="shift-modal-footer">
-              <button class="modal-btn cancel" v-on:click="closeShiftModal">CANCEL</button>
-              <button class="modal-btn shift" v-on:click="performShift">SHIFT</button>
+              <button class="modal-btn cancel" @click="showShiftModal=false">CANCEL</button>
+              <button class="modal-btn shift" @click="performShift">SHIFT</button>
             </div>
           </div>
       </vodal>
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="shift-all-modal-footer">
-            <button class="close-all-shifts-btn" v-on:click="closeShiftAllModal">DONE</button>
+            <button class="close-all-shifts-btn" @click="showShiftAllModal=false">DONE</button>
           </div>
         </div>
       </vodal>
@@ -61,26 +61,10 @@
       }
     },
     methods: {
-      openShiftModal () {
-        this.showShiftModal = true
-      },
-
-      closeShiftModal () {
-        this.showShiftModal = false
-      },
-
-      openShiftAllModal () {
-        this.showShiftAllModal = true
-      },
-
-      closeShiftAllModal () {
-        this.showShiftAllModal = false
-      },
-
       performShift () {
         let decryptedMessage = decipherCeaser(this.$store.state.Cipher.ciphertext, this.shiftAmt)
         this.$store.commit('updatePlaintext', decryptedMessage)
-        this.closeShiftModal()
+        this.showShiftModal = false
       }
     }
   }

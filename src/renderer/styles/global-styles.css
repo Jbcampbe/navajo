@@ -11,6 +11,7 @@
   padding: 27px;
   align-items: center;
   min-width: 200px;
+  overflow-x: scroll;
 }
 
 .cipher-input {
@@ -34,13 +35,13 @@
 .action-btn {
   width: 100%;
   max-width: 250px;
-  height: 65px;
+  height: 45px;
   background-color: #E3341B;
   color: white;
   border: none;
   border-radius: 4px;
   font-size: 17px;
-  margin-top: 30px;
+  margin-top: 15px;
   cursor: pointer;
   outline: none;
 }
