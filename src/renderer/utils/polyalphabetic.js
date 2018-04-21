@@ -79,9 +79,12 @@ function ic (message, numAlphabets) {
     for (let j = 0; j < n; j++) {
       counts[subtexts[i][j]] = counts[subtexts[i][j]] ? counts[subtexts[i][j]] + 1 : 1
     }
-    ics[i] = Object.values(counts).reduce((sum, value) => sum + (value * (value - 1))) / (n * (n - 1))
+    let vals = Object.values(counts)
+    if (vals.length !== 0) {
+      ics[i] = vals.reduce((sum, value) => sum + (value * (value - 1))) / (n * (n - 1))
+      ics[i] = Number.parseFloat(ics[i]).toFixed(3)
+    }
   }
-
   return ics
 }
 
