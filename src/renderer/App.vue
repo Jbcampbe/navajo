@@ -11,5 +11,8 @@
 </script>
 
 <style>
-  /* CSS */
+  @import "vodal/common.css";
+  @import "vodal/rotate.css";
+  @import "./styles/material-icons.css";
+  @import "./styles/global-styles.css";
 </style>
